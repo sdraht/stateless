@@ -68,7 +68,7 @@ namespace Stateless.Tests
                 b = label + " [label=\"" + label + "\"];\n";
             else
             {
-                b = label + " [label=\"" + label + "|" + String.Join("\\n", es) + "\"];\n";
+                b = label + " [label=\"" + label + "|" + String.Join("\\n", es.ToArray()) + "\"];\n";
             }
 
             return b.Replace("\n", Environment.NewLine);

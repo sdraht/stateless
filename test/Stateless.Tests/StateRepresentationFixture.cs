@@ -344,8 +344,8 @@ namespace Stateless.Tests
             Assert.True(sub.CanHandle(Trigger.X));
             Assert.True(super.CanHandle(Trigger.X));
             Assert.NotNull(result);     
-            Assert.True(result?.Handler.GuardConditionsMet());
-            Assert.False(result?.UnmetGuardConditions.Any());
+            Assert.True(result.Handler.GuardConditionsMet());
+            Assert.False(result.UnmetGuardConditions.Any());
 
         }
 

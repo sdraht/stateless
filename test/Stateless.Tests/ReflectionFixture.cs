@@ -183,7 +183,7 @@ namespace Stateless.Tests
                     haveYC = true;
                 }
                 else
-                    throw new XunitException("Failed.");
+                   Assert.True(false, "Failed.");
             }
             Assert.True(haveXB && haveYC);
             //
@@ -194,12 +194,12 @@ namespace Stateless.Tests
         [Fact]
         public void WhenDiscriminatedByAnonymousGuard_Binding()
         {
-            Func<bool> anonymousGuard = () => true;
+            //Func<bool> anonymousGuard = () => true;
 
             var sm = new StateMachine<State, Trigger>(State.A);
 
             sm.Configure(State.A)
-                .PermitIf(Trigger.X, State.B, anonymousGuard);
+                .PermitIf(Trigger.X, State.B, ()=>true);
 
             StateMachineInfo inf = sm.GetInfo();
 
@@ -234,12 +234,12 @@ namespace Stateless.Tests
         [Fact]
         public void WhenDiscriminatedByAnonymousGuardWithDescription_Binding()
         {
-            Func<bool> anonymousGuard = () => true;
+            //Func<bool> anonymousGuard = () => true;
 
             var sm = new StateMachine<State, Trigger>(State.A);
 
             sm.Configure(State.A)
-                .PermitIf(Trigger.X, State.B, anonymousGuard, "description");
+                .PermitIf(Trigger.X, State.B, ()=>true, "description");
 
             StateMachineInfo inf = sm.GetInfo();
 
@@ -750,7 +750,7 @@ namespace Stateless.Tests
             public StateConfiguration OnEntryFrom<TArg0, TArg1, TArg2>(TriggerWithParameters<TArg0, TArg1, TArg2> trigger, Action<TArg0, TArg1, TArg2, Transition> entryAction, string entryActionDescription = null)
              */
         }
-
+    #if TASKS
         [Fact]
         public void ReflectionMethodNamesAsync()
         {
@@ -821,7 +821,7 @@ namespace Stateless.Tests
             public StateConfiguration OnEntryFromAsync<TArg0, TArg1, TArg2>(TriggerWithParameters<TArg0, TArg1, TArg2> trigger, Func<TArg0, TArg1, TArg2, Transition, Task> entryAction, string entryActionDescription = null)
             */
         }
-
+    #endif
         State NextState()
         {
             return State.D;

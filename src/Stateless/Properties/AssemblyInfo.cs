@@ -18,4 +18,10 @@ using System.Resources;
     "82fbfab1")]
 
 [assembly: NeutralResourcesLanguageAttribute("en")]
+
+#if NET35
+// only because of lacking CLSCompliance  in NetLegacySupport.Tuple.dll
+[assembly: CLSCompliant(false)]
+#else
 [assembly: CLSCompliant(true)]
+#endif

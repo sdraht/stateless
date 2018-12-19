@@ -60,6 +60,8 @@ namespace Stateless.Tests
             sm.Fire(Trigger.X);
             Assert.Equal(State.B, sm.State);
         }
+
+    #if TASKS
         [Fact]
         public async void EntersSubStateAsync()
         {
@@ -76,6 +78,7 @@ namespace Stateless.Tests
             await sm.FireAsync(Trigger.X);
             Assert.Equal(State.C, sm.State);
         }
+
         [Fact]
         public async void EntersSubStateofSubstateAsync()
         {
@@ -115,6 +118,7 @@ namespace Stateless.Tests
             await sm.FireAsync(Trigger.X);
             Assert.Equal(State.B, sm.State);
         }
+    #endif
         [Fact]
         public void DoNotAllowTransitionToSelf()
         {
@@ -139,6 +143,7 @@ namespace Stateless.Tests
             Assert.Throws(typeof(InvalidOperationException), () =>
                 sm.Fire(Trigger.X) );
         }
+    #if TASKS
         [Fact]
         public async void DoNotAllowTransitionToAnotherSuperstateAsync()
         {
@@ -152,7 +157,7 @@ namespace Stateless.Tests
             await Assert.ThrowsAsync (typeof(InvalidOperationException), async () =>
                 await sm.FireAsync(Trigger.X) );
         }
-
+    #endif
         [Fact]
         public void DoNotAllowMoreThanOneInitialTransition()
         {

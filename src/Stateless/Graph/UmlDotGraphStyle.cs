@@ -30,8 +30,8 @@ namespace Stateless.Graph
             if ((stateInfo.EntryActions.Count > 0) || (stateInfo.ExitActions.Count > 0))
             {
                 label.Append("\\n----------");
-                label.Append(string.Concat(stateInfo.EntryActions.Select(act => "\\nentry / " + act)));
-                label.Append(string.Concat(stateInfo.ExitActions.Select(act => "\\nexit / " + act)));
+                label.Append(string.Concat(stateInfo.EntryActions.Select(act => "\\nentry / " + act).ToArray()));
+                label.Append(string.Concat(stateInfo.ExitActions.Select(act => "\\nexit / " + act).ToArray()));
             }
 
             stateRepresentationString = "\n"
@@ -65,7 +65,7 @@ namespace Stateless.Graph
             es.AddRange(state.EntryActions.Select(act => "entry / " + act));
             es.AddRange(state.ExitActions.Select(act => "exit / " + act));
 
-            f += String.Join("\\n", es);
+            f += String.Join("\\n", es.ToArray());
 
             f += "\"];\n";
 
@@ -86,7 +86,7 @@ namespace Stateless.Graph
             string label = trigger ?? "";
 
             if (actions?.Count() > 0)
-                label += " / " + string.Join(", ", actions);
+                label += " / " + string.Join(", ", actions.ToArray());
 
             if (guards.Any())
             {

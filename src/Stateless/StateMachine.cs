@@ -560,7 +560,7 @@ namespace Stateless
                 throw new InvalidOperationException(
                     string.Format(
                         StateMachineResources.NoTransitionsUnmetGuardConditions,
-                        trigger, state, string.Join(", ", unmetGuardConditions)));
+                        trigger, state, string.Join(", ", unmetGuardConditions.ToArray())));
 
             throw new InvalidOperationException(
                 string.Format(
