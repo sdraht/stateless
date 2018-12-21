@@ -108,7 +108,19 @@ namespace Stateless
             public ICollection<string> UnmetGuardConditions(object[] args)
             {
                 return Conditions
-                    .Where(c => !c.Guard(args))
+                    .Where(c =>
+                    {
+                      try
+                      {
+                        return !c.Guard(args);
+                      }
+                      catch(ArgumentException)
+                      {
+                        return true;
+                      }
+
+
+                    })
                     .Select(c => c.Description)
                     .ToList();
             }
